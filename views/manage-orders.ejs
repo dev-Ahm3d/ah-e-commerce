@@ -1,0 +1,61 @@
+<%- include('staticParts/header') %>
+<%- include('staticParts/navbar') %>
+
+
+<% if(allOrders) { %> 
+    <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">User Name</th>
+            <th scope="col">User Email</th>
+            <th scope="col">Product</th>
+            <th scope="col">amount</th>
+            <th scope="col">Cost</th>
+            <th scope="col">Address</th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+    
+          </tr>
+        </thead>
+        <tbody>
+            <% if(allOrders.length != 0 ){ %> 
+                <% for(let i=0 ; i<allOrders.length;i++){ %> 
+                    
+                    <tr>
+                        <th scope="row"><%= i+1 %> </th>
+                        <td><%= allOrders[i].orderUserName  %> </td>
+                        <td><%= allOrders[i].orderUserEmail  %> </td>
+                        <td><%= allOrders[i].productName  %> </td>
+                        <td><%= allOrders[i].amount  %> </td>
+                        <td><%= allOrders[i].cost  %>$</td>
+                        <td><%= allOrders[i].address  %> </td>
+                        <td><%= allOrders[i].date  %> </td>
+                        <td> 
+                            <form action="/manage-orders" method="POST">
+                                <select name="st" >
+                                    <option selected value="<%= allOrders[i].status  %>"><%= allOrders[i].status  %></option>
+                                    <% let stArray = ['pending' , 'sent' , 'completed'] ; %>
+                                    <% let newSt = stArray.filter(element => element != allOrders[i].status ) %>  
+                                    <% for (let el of newSt){ %> 
+                                        <option value="<%= el  %>"><%= el  %></option>
+                                    <% } %> 
+                                </select>
+                                <input hidden  name="orderId" value="<%= allOrders[i]._id  %>">
+                                <input style="margin-left: 10px;margin-top: 5px;" type="submit" class="btn btn-success" value="Save">
+                            </form>
+                        </td>
+                      </tr>
+                <% } %> 
+            <% } %> 
+          
+          
+        </tbody>
+      </table>
+<% }else { %> 
+    <p class="alert alert-danger">There Are No Orders</p>
+<% } %> 
+
+
+
+<%- include('staticParts/footer') %>

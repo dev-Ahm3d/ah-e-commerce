@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <a class="navbar-brand" href="/">Online-Shop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        
+        <li class="nav-item <%= title === 'Home' ? 'active' : '' %> "   >  
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <% if(isUser) { %> 
+          <li class="nav-item <%= title == 'Cart' ? 'active' : '' %> ">
+            <a class="nav-link" href="/cart">Cart</a>
+          </li>
+        <% }else{ %> 
+          <li class="nav-item <%= title == 'Login' ? 'active' : '' %> ">
+            <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item <%= title == 'Sign-Up' ? 'active' : '' %> ">
+            <a class="nav-link" href="/sign-up">Sign-Up</a>
+        </li>
+        <% } %>  
+        <% if(isAdmin){ %> 
+        <li class="nav-item <%= title == 'Admin | Add-Product' ? 'active' : '' %> ">
+            <a class="nav-link" href="/add-product">Add Product</a>
+        </li>
+        <li class="nav-item <%= title == 'Admin | Manage-Orders' ? 'active' : '' %> ">
+            <a class="nav-link" href="/manage-orders">Manage-Orders</a>
+        </li>
+      <% } %> 
+      </ul>
+      <% if(isUser){ %> 
+        <form action="/logout" method="POST" style="float: right;">
+          <input type="submit" value="Logout" class="btn btn-danger">
+        </form>
+      <% } %> 
+    </div>
+  </nav>

@@ -1,0 +1,88 @@
+<%- include('staticParts/header') %>
+<%- include('staticParts/navbar') %>
+
+<% if(userCart.length != 0){ %>
+    <div>
+
+    
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"> Name </th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Total Cost</th>
+                  </tr>
+                </thead>
+            
+             <% for( let i=0 ; i<userCart.length ; i++ ) {%>
+                <tbody>
+                  <tr>
+                    <th scope="row"><%= i+1  %> </th>
+                    <td><%= userCart[i].name  %></td>
+                    <td><%= userCart[i].price  %>$</td>
+                    <td><%= userCart[i].amount  %></td>
+                    <td><img src="/<%= userCart[i].imageUrl  %> " style="width: 50px;height: 50px;"></td>
+                    <td><%= userCart[i].amount * userCart[i].price  %>$</td>
+                    <td>
+                            <form style="float: right;">
+                                <input style="margin: 5px;bottom: -7px;position: relative;width: 50px ; height: 35px;; " hidden type="number" id="inpu" name="amountEdit">
+                                <input style="margin: 5px;" hidden type="number" name="amount" value="<%= userCart[i].amount  %>">
+
+                                <input style="margin: 5px 0px 0px 5px;" id="bt1"  type="submit" value="Edit" class="btn btn-success">
+                                <input style="margin: 5px 0px 0px 5px;" id="bt2" hidden   type="submit" value="Save" class="btn btn-success" formaction="/cart/editOne" formmethod="POST">
+                                    <input  type="hidden" name="cartId" value="<%= userCart[i]._id %>">
+                                    <input hidden type="text" name="name" value="<%= userCart[i].name %>">
+                                    <input hidden type="text" name="price" value="<%= userCart[i].price %>">
+                                    <input hidden type="text" name="imageUrl" value="<%= userCart[i].imageUrl %>">
+                                <input style="margin: 5px 0px 0px 5px;" id="bt3"  type="submit" value="Order" class="btn btn-primary" formaction="/order/orderOne" formmethod="GET">
+                                <input style="margin: 5px 0px 0px 5px;" id="bt4"  type="submit" value="Delete" class="btn btn-danger" formaction="/cart/deleteOne" formmethod="POST">
+                                <input hidden type="text">
+                            </form>
+            
+                    </td>
+                   
+                  </tr>
+                </tbody>
+                <% } %>  
+              </table>
+
+              <div style="margin-bottom: 10px;">
+                <form  style="float: right;">
+                  <input class="btn btn-primary" type="submit" value="Order All" formaction="/order/orderAll" formmethod="GET">
+                  <input style="margin-right: 5px;" class="btn btn-danger" type="submit" value="Delete All" formaction="/cart/deleteAll" formmethod="POST">
+                </form>
+              </div>
+
+              <% if(editErrs.length != 0){ %> 
+                <p class="alert alert-danger" style="margin-top: 60px;"> <%= editErrs[0].msg %>  </p>
+              <% } %>
+
+              
+        
+    
+
+</div>
+
+<% }else { %> 
+    <p class="alert alert-danger">Your Cart Is Empty</p>
+<% } %> 
+
+   
+
+
+
+<script>
+    if(document.getElementById('bt1')) {
+        document.getElementById("bt1").addEventListener("click", function(event){
+  event.preventDefault() ; 
+  document.getElementById('inpu').removeAttribute('hidden') ;
+  document.getElementById('bt1').style.display = 'none' ;
+  document.getElementById('bt2').removeAttribute('hidden') ;
+
+})
+    }
+</script>
+<%- include('staticParts/footer') %>

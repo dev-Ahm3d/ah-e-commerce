@@ -1,0 +1,59 @@
+<%- include('staticParts/header.ejs') %>
+<%- include('staticParts/navbar.ejs') %>
+
+<div class="container text-center">
+    <h2>Sign-Up</h2>
+    <div class="text-center">
+        <form action="/sign-up" method="POST">
+            <input type="text" placeholder="Name" name="name" class="form-control" style="margin-top: 5px;">
+            <% if(vErrors.length != 0) { %>
+                <% let nameErrs = vErrors.filter(element => element.param=='name') %>
+                <% for(let i=0 ; i<nameErrs.length ; i++) { %>
+                    <p class="alert alert-danger" style="margin-top: 10px;"> <%= nameErrs[i].msg %>  </p>
+                <% } %> 
+            <% } %>  
+
+            <input type="text" placeholder="Email" name="email" class="form-control" style="margin-top: 5px;">
+            <% if(vErrors.length != 0) { %>
+                <% let emailErrs = vErrors.filter(element => element.param=='email') %>
+                    <p class="alert alert-danger" style="margin-top: 10px;"> <%= emailErrs[0].msg %>  </p>
+            <% } %> 
+
+
+
+
+            <input type="password" placeholder="Password" name="pass" class="form-control" style="margin-top: 5px;">
+            <% if(vErrors.length != 0) { %>
+                <% let passErrs = vErrors.filter(element => element.param=='pass') %>
+                <% for(let i=0 ; i<passErrs.length ; i++) { %>
+                    <p class="alert alert-danger" style="margin-top: 10px;"> <%= passErrs[i].msg %>  </p>
+                <% } %> 
+            <% } %> 
+
+
+
+
+
+            <input type="password" placeholder="Confirm Password" name="confirmPass" class="form-control" style="margin-top: 5px;">
+            <% if(vErrors.length != 0) { %>
+                <% let confirmPassErrs = vErrors.filter(element => element.param=='confirmPass') %>
+                <% for(let i=0 ; i<confirmPassErrs.length ; i++) { %>
+                    <p class="alert alert-danger" style="margin-top: 10px;"> <%= confirmPassErrs[i].msg %>  </p>
+                <% } %> 
+            <% } %> 
+
+
+
+
+            <input type="submit" value="Creat Account" class="btn btn-primary" style="margin-top: 10px;" >
+        </form>
+    </div>
+
+   
+
+</div>
+
+
+
+
+<%- include('staticParts/footer.ejs') %>

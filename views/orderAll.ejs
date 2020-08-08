@@ -1,0 +1,15 @@
+<%- include('staticParts/header') %>
+<%- include('staticParts/navbar') %>
+
+<div class="container" >
+    <form action="/order/orderAll" method="POST" class="text-center">
+        <input style="margin-top: 20px;" type="text" placeholder="Address" name="address" class="form-control">
+        <input type="submit" value="Order Now" class="btn btn-success" style="margin-top: 10px;">
+    </form>
+</div>
+
+<% if(oAllErrs && oAllErrs.length !=0){ %> 
+    <p class="alert alert-danger"><%= oAllErrs[0].msg  %>  </p>
+<% } %> 
+
+<%- include('staticParts/footer') %>

@@ -1,0 +1,19 @@
+<%- include('staticParts/header') %>
+<%- include('staticParts/navbar') %>
+
+<div class="container" >
+    <form action="/order/orderOne" method="POST" class="text-center">
+        <input style="margin-top: 20px;" type="text" placeholder="Address" name="address" class="form-control">
+        <input type="submit" value="Order Now" class="btn btn-success" style="margin-top: 10px;">
+        <input type="hidden" name="name" value="<%= name %>" >
+        <input type="hidden" name="price" value="<%= price %>" >
+        <input type="hidden" name="amount" value="<%= amount %>" >
+        <input type="hidden" name="cartId" value="<%= cartId %>" >
+    </form>
+</div>
+
+<% if(oOneErrs && oOneErrs.length !=0){ %> 
+    <p class="alert alert-danger"><%= oOneErrs[0].msg  %>  </p>
+<% } %> 
+
+<%- include('staticParts/footer') %>

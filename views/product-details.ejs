@@ -1,0 +1,50 @@
+<%- include('staticParts/header.ejs') %>
+<%- include('staticParts/navbar.ejs') %>
+
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 "  >
+            <% if(product != 'error'){ %> 
+              <div class="card  " style=" width: 18rem; background-color: rgb(247, 244, 244);
+              margin: 5px auto; border-radius: 10px;" >
+                  <img style="padding-top: 5px;" src="/<%= product.imageUrl  %>" style="height: 200px;" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= product.name  %>  </h5>
+                    <h5 class="card-title">Price : <%= product.price %> $</h5>
+                    <form action="/products/<%= product._id %>" method="POST">
+                      <input type="number" placeholder="amount" name="amount" class="form-control">
+                      <input hidden type="text" name="pId" value="<%= product._id %>">
+                      <input hidden type="text" name="name" value="<%= product.name %>">
+                      <input hidden type="text" name="price" value="<%= product.price %>">
+                      <input hidden type="text" name="imageUrl" value="<%= product.imageUrl %>">
+                      <input style="margin-top: 10px;" type="submit" value="Add To Cart" class="btn btn-primary">
+                      <% if(amountErrs.length != 0){ %> 
+                        <p style="margin-top: 5px;" class="alert alert-danger"><%= amountErrs[0].msg  %> </p>
+                      <% } %> 
+            
+                    </form>
+                  </div>
+              </div>
+        </div>
+
+        <div class="col-md-6 " style="margin: 15px auto;" >
+            <div class="card" style="background-color: rgb(77, 80, 80);">
+                <div class="card-body">
+                  <h6 class="card-title" style="color: white;">Description :  </h6>
+                  <p class="card-text" style="color: white;"> <%= product.description %> </p>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+  </div>
+
+        <% }else{ %> 
+          <div class="alert alert-danger">Not Found</div>
+        <% } %> 
+
+    
+
+
+<%- include('staticParts/footer.ejs') %>

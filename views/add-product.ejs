@@ -1,0 +1,53 @@
+<%- include('staticParts/header') %>
+<%- include('staticParts/navbar') %>
+
+
+
+<div class="container text-center" style="margin-top: 10px;">
+    <form action="/add-product" method="POST" enctype="multipart/form-data">
+        
+        <input style="margin-bottom: 5px;" type="text" name="pName" class="form-control" placeholder="Product Name">
+        <% if( addPErrs.length != 0 ){ %> 
+            <% let thisFErr = addPErrs.filter(el => el.param == 'pName')  %> 
+            <% if(thisFErr[0]){ %> 
+                <p class="alert alert-danger"> <%= thisFErr[0].msg  %> </p>
+            <% } %> 
+        <% } %> 
+
+        <input style="margin-bottom: 5px;" type="number" name="pPrice" class="form-control" placeholder="Product Price">
+        <% if( addPErrs.length != 0 ){ %> 
+            <% let thisFErr = addPErrs.filter(el => el.param == 'pPrice')  %> 
+            <% if(thisFErr[0]){ %> 
+                <p class="alert alert-danger"> <%= thisFErr[0].msg  %> </p>
+            <% } %> 
+        <% } %> 
+
+        <select  style="margin-bottom: 5px;" name="pCategory" class="custom-select" >
+            <option selected value="phones">Phones</option>
+            <option value="labtops">Labtops</option>
+        </select>
+
+        <input style="margin-bottom: 5px;" type="text" name="pDescription" class="form-control" placeholder="Product Description">
+        <% if( addPErrs.length != 0 ){ %> 
+            <% let thisFErr = addPErrs.filter(el => el.param == 'pDescription')  %> 
+            <% if(thisFErr[0]){ %> 
+                <p class="alert alert-danger"> <%= thisFErr[0].msg  %> </p>
+            <% } %> 
+        <% } %> 
+
+        <input class="form-control" style="margin-bottom: 5px;" type="file" name="imageField"> <br>
+        <% if(imageUploadErr){ %> 
+            <p class="alert alert-danger"> <%= imageUploadErr.msg %> </p> <br>
+        <% } %> 
+        <% if(upErr){ %> 
+            <p class="alert alert-danger"><%= upErr  %> </p>
+        <% } %> 
+        <input type="submit" value='add-product' class="btn btn-primary">
+       
+    </form>
+    
+</div>
+
+
+
+<%- include('staticParts/footer') %>
